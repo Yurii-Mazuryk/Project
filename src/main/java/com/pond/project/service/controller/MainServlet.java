@@ -17,8 +17,7 @@ public class MainServlet extends HttpServlet {
         String command = request.getParameter("command");
         Command executeCommand = new CommandContainer().getCommand(command);
         String path = executeCommand.execute(request, response);
-        request.getRequestDispatcher(path).forward(request, response);
-
+        response.sendRedirect(path);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");

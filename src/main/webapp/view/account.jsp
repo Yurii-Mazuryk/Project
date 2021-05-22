@@ -7,29 +7,29 @@
     <meta charset="UTF-8">
     <title>Account</title>
     <link rel="stylesheet" href="resources/styles/test.css">
-    <script src="https://kit.fontawesome.com/70d19259f2.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/70d19259f2.js" crossorigin="anonymous">
+    </script>
     <script>
-        function showAddEvents() {
-            document.getElementById("add-event").showModal();
-        }
-        function closeAddEvents() {
-            document.getElementById("add-event").close();
-        }
-        function showChangePassword() {
-            document.getElementById("change-password").showModal();
-        }
-        function closeChangePassword() {
-            document.getElementById("change-password").close();
-        }
+    function showChangePassword() {
+        document.getElementById("change-password").showModal();
+    }
+    function closeChangePassword() {
+        document.getElementById("change-password").close();
+    }
 
-        function showChangeName() {
-            document.getElementById("change-name").showModal();
-        }
-        function closeChangeName() {
-            document.getElementById("change-name").close();
-        }
+    function showChangeName() {
+        document.getElementById("change-name").showModal();
+    }
+    function closeChangeName() {
+        document.getElementById("change-name").close();
+    }
 
-
+    function showAddEvents() {
+        document.getElementById("add-event").showModal();
+    }
+    function closeAddEvents() {
+        document.getElementById("add-event").close();
+    }
     </script>
 </head>
 <body style="background: rgb(238,174,202);
@@ -69,6 +69,21 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <button onclick="showAddEvents()" class="gradient-button">
         <span>Attach event</span>
     </button>
+    <a href="reports_text.html">
+        <button class="gradient-button">
+            <span>Reports text</span>
+        </button>
+    </a>
+    <a href="main?command=display_reports">
+        <button class="gradient-button">
+            <span>Reports</span>
+        </button>
+    </a>
+    <a href="main?command=display_user">
+        <button class="gradient-button">
+            <span>Users</span>
+        </button>
+    </a>
 </c:if>
 <!---->
 <!--if UserRole == Speaker-->
@@ -225,18 +240,16 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <div class="table-wrapper">
         <table class="table">
             <tr>
-                <th>Report_id</th>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Event Name</th>
             </tr>
 
             <c:forEach var="report" items="${reports}">
                 <tr>
-                    <td>${event.getName()}</td>
-                    <td>${event.getAddress()}</td>
-                    <td>${event.getDate()}</td>
-                    <td>${event.getCountOfParticipant()}</td>
-                    <td>${event.getCountOfReports()}</td>
+                    <td>${report.getId()}</td>
+                    <td>${report.getTitle()}</td>
+                    <td>${report.getEventName()}</td>
                 </tr>
             </c:forEach>
         </table>

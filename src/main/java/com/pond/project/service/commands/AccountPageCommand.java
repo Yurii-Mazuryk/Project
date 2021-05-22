@@ -15,6 +15,8 @@ public class AccountPageCommand implements Command {
         request.setAttribute("actives", list);
         if(request.getSession().getAttribute("role").equals("1"))
             return new DisplayFreeReportCommand().execute(request, response);
+        if ("POST".equalsIgnoreCase(request.getMethod()))
+            return "main?command=account_page";
         return "/view/account.jsp";
     }
 }

@@ -5,7 +5,6 @@ import com.pond.project.service.models.Event;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 
 public class AddEventCommand implements Command{
 

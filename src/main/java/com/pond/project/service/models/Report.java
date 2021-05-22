@@ -7,6 +7,15 @@ public class Report {
     private int speakerId;
     private String eventName;
     private boolean isReportConfirmed = false;
+    private int offersCount = 0;
+
+    public int getOffersCount() {
+        return offersCount;
+    }
+
+    public void setOffersCount(int offersCount) {
+        this.offersCount = offersCount;
+    }
 
     public String getEventName() {
         return eventName;

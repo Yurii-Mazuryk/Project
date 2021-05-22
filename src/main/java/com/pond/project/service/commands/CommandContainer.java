@@ -3,6 +3,7 @@ package com.pond.project.service.commands;
 
 import com.pond.project.service.commands.redirect.LoginPageCommand;
 import com.pond.project.service.commands.redirect.RegistrationPageCommand;
+import com.pond.project.service.commands.redirect.StartPageRedirectCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,9 @@ public class CommandContainer {
         commandMap.put("change_password", new ChangePasswordCommand());
         commandMap.put("change_name", new ChangeUserNameCommand());
         commandMap.put("add_event", new AddEventCommand());
+        commandMap.put("start_page", new StartPageRedirectCommand());
+        commandMap.put("change_role", new ChangeRoleCommand());
+        commandMap.put("display_reports", new DisplayReportsCommand());
     }
 
     public Command getCommand(String commandName) {

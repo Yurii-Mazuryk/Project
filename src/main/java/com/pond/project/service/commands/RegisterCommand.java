@@ -32,6 +32,8 @@ public class RegisterCommand implements Command{
             return path;
         }
         new UserDao().insertUser(user);
+        if ("POST".equalsIgnoreCase(request.getMethod()))
+            return "main?command=login_page";
         return path;
     }
 }

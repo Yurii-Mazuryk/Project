@@ -35,6 +35,8 @@ public class LoginCommand implements  Command{
         session.setAttribute("user_name", user.getName());
         session.setAttribute("user_login", user.getLogin());
         session.setAttribute("role", user.getRole());
+        if ("POST".equalsIgnoreCase(request.getMethod()))
+            return "main?command=start_page";
         return "/view/start-page.jsp";
     }
 }
