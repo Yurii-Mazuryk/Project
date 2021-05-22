@@ -27,11 +27,12 @@ public class DisplayEventCommand implements Command {
             list = new EventDao().getFutureEvents((page - 1) * recordsPerPage,
                     recordsPerPage);
             noOfRecords = new EventDao().getCountOfFutureEvents();
-        } else if (request.getParameter("events_type").equals("participant")) {
-            int user_id = Integer.parseInt(request.getParameter("user_id"));
-            list = new EventDao().getMemberEvents(user_id,(page - 1) * recordsPerPage,
-                    recordsPerPage);
-            noOfRecords = new EventDao().getCountOfMemberEvents(user_id);
+        } else if (request.getParameter("events_type").equals("completed")) {
+            int user_id = (int) request.getSession().getAttribute("user_id");
+            list = new EventDao().getMemberCompletedEvents(user_id);
+            noOfRecords = 10;
+            recordsPerPage = 10;
+//            noOfRecords = new EventDao().getCountOfMemberCompletedEvents(user_id);
         }
 
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);

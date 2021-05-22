@@ -2,7 +2,6 @@ package com.pond.project.service.dao;
 
 import com.pond.project.service.DB.PoolConnectionBuilder;
 import com.pond.project.service.models.Report;
-import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
+
 public class ReportDao {
     private final String SQL_INSERT_REPORT = "INSERT INTO Project.reports (title, text, event_name) VALUES (?, ?, ?)";
     private final String SQL_SET_SPEAKER = "UPDATE Project.reports SET speaker_id = ? WHERE title = ?";
@@ -34,7 +33,7 @@ public class ReportDao {
         }
     }
 
-    public List<Report> getEvents(int start, int limit) {
+    public List<Report> getFreeReports(int start, int limit) {
         List<Report> list = new ArrayList<>();
         Connection connection = new PoolConnectionBuilder().getConnection();
         try {

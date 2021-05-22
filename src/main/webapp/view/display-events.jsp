@@ -1,3 +1,4 @@
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,8 +18,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </c:if>
     <a href="http://localhost:8080/PetProject_war/"><i>Home</i></a>
     <a href="main?command=display_event&events_type=future"><i style="color:blue">Events</i></a>
-    <c:if test="${role == 2}"><a href="main?command=account_page"><i>Account</i></a></c:if>
-    <c:if test="${role == 1}"><a href="main?command=account_page&command="><i>Account</i></a></c:if>
+    <a href="main?command=account_page"><i>Account</i></a>
     <c:if test="${empty user_name}">
         <a href="main?command=login_page"><i>Log in</i></a>
     </c:if>
@@ -27,14 +27,11 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </c:if>
 </div>
 <div class="events-header">
-    <p>All Conference events</p>
+    <p><%=request.getParameter("events_type")%> events</p>
 </div>
 <div class="table-wrapper">
     <table class="table">
         <tr>
-            <c:if test="${role == 0}">
-                <th>ID</th>
-            </c:if>
             <th>Name</th>
             <th>Address</th>
             <th>Date</th>
@@ -43,11 +40,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         </tr>
 
         <c:forEach var="event" items="${events}">
-            <tr>
-                <c:if test="${role == 0}">
-                    <td>${event.getId()}</td>
-                </c:if>
-                <td>${event.getName()}</td>
+                <td><a href="main?command=subscribe_event&event_id=${event.getId()}">${event.getName()}</a></td>
                 <td>${event.getAddress()}</td>
                 <td>${event.getDate()}</td>
                 <td>${event.getCountOfParticipant()}</td>

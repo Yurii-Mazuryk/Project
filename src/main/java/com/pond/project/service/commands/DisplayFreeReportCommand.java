@@ -14,7 +14,7 @@ public class DisplayFreeReportCommand implements Command{
         int recordsPerPage = 5;
         if (request.getParameter("page") != null)
             page = Integer.parseInt(request.getParameter("page"));
-        List<Report> list = new ReportDao().getEvents((page - 1) * recordsPerPage,
+        List<Report> list = new ReportDao().getFreeReports((page - 1) * recordsPerPage,
                 recordsPerPage);
         int noOfRecords = new ReportDao().getCountOfFreeReports();
 

@@ -70,11 +70,13 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 </button>
 
 <!--if UserRole == Speaker-->
-<a href="#">
+
+<a href="main?command=display_event&events_type=completed">
     <button class="gradient-button">
         <span>Completed events</span>
     </button>
 </a>
+
 <!---->
 
 <dialog id="change-password">
@@ -148,25 +150,30 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </div>
 </dialog>
 
-<dialog id="delete-events">
-    <div class="registration_form">
-        <div class="close-icon">
-            <i onclick="closeDeleteEvents()" class="far fa-times-circle"></i>
-        </div>
-        <form method="post" class="form">
-            <select id="events" name="event" class="input select">
-                <option value="1">Conference</option>
-                <option value="2">Conference</option>
-                <option value="3">Conference</option>
-                <option value="4">Conference</option>
-            </select>
+<c:if test="${role != 0}">
+<h1 class="header-account">Active events</h1>
+    <div class="table-wrapper">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Date</th>
+                <th>Members</th>
+                <th>Reports</th>
+            </tr>
 
-            <button onclick="closeDeleteEvents()" class="gradient-button is-small">
-                Delete event
-            </button>
-        </form>
+            <c:forEach var="active" items="${actives}">
+                <tr>
+                    <td>${active.getName()}</td>
+                    <td>${active.getAddress()}</td>
+                    <td>${active.getDate()}</td>
+                    <td>${active.getCountOfParticipant()}</td>
+                    <td>${active.getCountOfReports()}</td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
-</dialog>
+</c:if>
 
 
 <!--if UserRole == Speaker-->
@@ -182,9 +189,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 
             <c:forEach var="report" items="${reports}">
                 <tr>
-                    <c:if test="${role == 0}">
-                        <td>${event.getId()}</td>
-                    </c:if>
                     <td>${event.getName()}</td>
                     <td>${event.getAddress()}</td>
                     <td>${event.getDate()}</td>
@@ -199,7 +203,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <table class="table" style="width: fit-content;">
         <tr>
             <c:if test="${currentPage != 1}">
-                <td><a href="main?command=display_event&events_type=<%=request.getParameter("events_type")%>&page=${currentPage - 1}">&laquo</a></td>
+                <td><a href="main?command=free_reports&page=${currentPage - 1}">&laquo</a></td>
             </c:if>
             <c:forEach begin="1" end="${noOfPages}" var="i">
                 <c:choose>
@@ -207,12 +211,12 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                         <td>${i}</td>
                     </c:when>
                     <c:otherwise>
-                        <td><a href="main?command=display_event&events_type=<%=request.getParameter("events_type")%>&page=${i}">${i}</a></td>
+                        <td><a href="main?command=free_reports&page=${i}">${i}</a></td>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test="${currentPage lt noOfPages}">
-                <td><a href="main?command=display_event&events_type=<%=request.getParameter("events_type")%>&page=${currentPage + 1}">&raquo</a></td>
+                <td><a href="main?command=free_reports&page=${currentPage + 1}">&raquo</a></td>
             </c:if>
         </tr>
     </table>

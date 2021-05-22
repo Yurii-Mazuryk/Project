@@ -2,7 +2,6 @@ package com.pond.project.service.dao;
 
 import com.pond.project.service.DB.PoolConnectionBuilder;
 import com.pond.project.service.models.User;
-import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
+
 public class UserDao {
     private final String SQL_INSERT_USER = "INSERT INTO " +
             "Project.users(user_login, user_password, user_name, user_phone, role_id) " +
@@ -130,4 +129,5 @@ public class UserDao {
         }
         return countOfUsers;
     }
+
 }

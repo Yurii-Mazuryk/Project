@@ -29,7 +29,7 @@ public class LoginCommand implements  Command{
             request.setAttribute("error-message", "Incorrect password.");
             return path;
         }
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(-1);
         session.setAttribute("user_id", user.getId());
         session.setAttribute("user_name", user.getName());

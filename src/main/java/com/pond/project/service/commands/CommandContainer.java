@@ -1,7 +1,6 @@
 package com.pond.project.service.commands;
 
 
-import com.pond.project.service.commands.redirect.AccountPageCommand;
 import com.pond.project.service.commands.redirect.LoginPageCommand;
 import com.pond.project.service.commands.redirect.RegistrationPageCommand;
 
@@ -22,6 +21,7 @@ public class CommandContainer {
         commandMap.put("display_event", new DisplayEventCommand());
         commandMap.put("account_page", new AccountPageCommand());
         commandMap.put("free_reports", new DisplayFreeReportCommand());
+        commandMap.put("subscribe_event", new SubscribeEventCommand());
     }
 
     public Command getCommand(String commandName) {

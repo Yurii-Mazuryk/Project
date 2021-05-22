@@ -28,8 +28,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         </c:if>
         <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
         <a href="main?command=display_event&events_type=future"><i>Events</i></a>
-        <c:if test="${role == 2}"><a href="main?command=account_page"><i>Account</i></a></c:if>
-        <c:if test="${role == 1}"><a href="main?command=account_page&command=free_reports"><i>Account</i></a></c:if>
+        <a href="main?command=account_page"><i>Account</i></a>
         <c:if test="${empty user_name}">
             <a href="main?command=login_page"><i>Log in</i></a>
         </c:if>
@@ -51,7 +50,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <p>
     <div class="date"><span class="text">${event.date}</span></div>
     <div class="date" id="city"><span class="text">${event.address}</span></div>
-    <div class="date" id="reg"><a href="#"><span class="text">Register</span></a></div>
+    <div class="date" id="reg"><a href="main?command=subscribe_event&event_id=<%=event.getId()%>"><span class="text">Register</span></a></div>
     </p>
 </div>
 

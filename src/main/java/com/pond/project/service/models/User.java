@@ -1,9 +1,7 @@
 package com.pond.project.service.models;
 
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class User {
     private int id;
     private String login;
