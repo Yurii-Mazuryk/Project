@@ -86,7 +86,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <div class="close-icon">
             <i onclick="closeChangePassword()" class="far fa-times-circle"></i>
         </div>
-        <form method="post" class="form">
+        <form method="post" class="form" action="/PetProject_war/main">
             <input type="hidden" name="command" value="change_password">
             <div class="input-change-password">
                 <input
@@ -119,7 +119,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                 />
             </div>
 
-            <button onclick="closeChangePassword()" class="gradient-button is-small">
+            <button type="submit" onclick="closeChangePassword()" class="gradient-button is-small">
                 Change password
             </button>
         </form>
@@ -131,7 +131,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <div class="close-icon">
             <i onclick="closeChangeName()" class="far fa-times-circle"></i>
         </div>
-        <form method="post" class="form">
+        <form method="post" class="form" action="/PetProject_war/main">
             <input type="hidden" name="command" value="change_name">
             <div class="input-change-password">
                 <input
@@ -141,10 +141,10 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                         placeholder="New name"
                         class="input"
                         required
-                />
+                >
             </div>
 
-            <button onclick="closeChangeName()" class="gradient-button is-small">
+            <button type="submit" onclick="closeChangeName()" class="gradient-button is-small">
                 Change name
             </button>
         </form>
@@ -156,7 +156,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <div class="close-icon">
             <i onclick="closeAddEvents()" class="far fa-times-circle"></i>
         </div>
-        <form method="post" class="form">
+        <form method="post" class="form" action="/PetProject_war/main">
             <div class="input-change-password">
                 <input type="hidden" name="command" value="add_event"/>
                 <input
@@ -182,14 +182,13 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                 <input
                         style="width: 94%"
                         type="datetime-local"
-                        pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
                         name="date"
                         class="input"
                         required
                 />
             </div>
 
-            <button onclick="closeAddEvents()" class="gradient-button is-small">
+            <button type="submit" onclick="closeAddEvents()" class="gradient-button is-small">
                 Add event
             </button>
         </form>

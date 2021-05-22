@@ -35,7 +35,7 @@ public class EventDao {
         Connection connection = new PoolConnectionBuilder().getConnection();
         try {
             PreparedStatement pStmt = connection.prepareStatement(SQL_CREATE_EVENT);
-            pStmt.setString(1, event.getDate());
+            pStmt.setTimestamp(1, Timestamp.valueOf(event.getDate()));
             pStmt.setString(2, event.getAddress());
             pStmt.setString(3, event.getName());
             pStmt.executeUpdate();

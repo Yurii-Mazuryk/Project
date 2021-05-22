@@ -13,8 +13,9 @@ public class ChangeUserNameCommand implements Command{
         String name = request.getParameter("newName");
         Pattern p = Pattern.compile("[A-Za-z]");
         Matcher m = p.matcher(name);
-        if (m.matches()) {
+        if (m.find()) {
             new UserDao().changeUserName((int) request.getSession().getAttribute("user_id"), name);
+            request.getSession().setAttribute("user_name", name);
         } else {
             request.setAttribute("error-message", "Incorrect name.");
             return "/error/error-page.jsp";

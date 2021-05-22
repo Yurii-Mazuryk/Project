@@ -5,6 +5,7 @@ import com.pond.project.service.models.Event;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 
 public class AddEventCommand implements Command{
 
@@ -14,7 +15,8 @@ public class AddEventCommand implements Command{
 
         event.setName(request.getParameter("eventName"));
         event.setAddress(request.getParameter("address"));
-        event.setDate("date");
+        event.setDate(request.getParameter("date").replace('T', ' ') + ":00");
+
         if (event.getName() != null || event.getAddress() != null || event.getDate() == null)
             new EventDao().insertEvent(event);
         else {
