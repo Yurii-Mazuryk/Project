@@ -1,10 +1,7 @@
 package com.pond.project.service.commands;
 
-import com.pond.project.service.commands.Command;
 import com.pond.project.service.dao.EventDao;
-import com.pond.project.service.dao.UserDao;
 import com.pond.project.service.models.Event;
-import com.pond.project.service.models.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

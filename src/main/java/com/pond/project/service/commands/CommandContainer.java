@@ -22,6 +22,9 @@ public class CommandContainer {
         commandMap.put("account_page", new AccountPageCommand());
         commandMap.put("free_reports", new DisplayFreeReportCommand());
         commandMap.put("subscribe_event", new SubscribeEventCommand());
+        commandMap.put("change_password", new ChangePasswordCommand());
+        commandMap.put("change_name", new ChangeUserNameCommand());
+        commandMap.put("add_event", new AddEventCommand());
     }
 
     public Command getCommand(String commandName) {

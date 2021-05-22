@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="resources/styles/test.css">
     <script src="https://kit.fontawesome.com/70d19259f2.js" crossorigin="anonymous"></script>
     <script>
+        function showAddEvents() {
+            document.getElementById("add-event").showModal();
+        }
+        function closeAddEvents() {
+            document.getElementById("add-event").close();
+        }
         function showChangePassword() {
             document.getElementById("change-password").showModal();
         }
@@ -23,12 +29,6 @@
             document.getElementById("change-name").close();
         }
 
-        function showDeleteEvents() {
-            document.getElementById("delete-events").showModal();
-        }
-        function closeDeleteEvents() {
-            document.getElementById("delete-events").close();
-        }
 
     </script>
 </head>
@@ -65,10 +65,12 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <span>Change name</span>
 </button>
 
-<button onclick="showDeleteEvents()" class="gradient-button">
-    <span>Delete event</span>
-</button>
-
+<c:if test="${role == 0}">
+    <button onclick="showAddEvents()" class="gradient-button">
+        <span>Attach event</span>
+    </button>
+</c:if>
+<!---->
 <!--if UserRole == Speaker-->
 
 <a href="main?command=display_event&events_type=completed">
@@ -85,9 +87,8 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             <i onclick="closeChangePassword()" class="far fa-times-circle"></i>
         </div>
         <form method="post" class="form">
-
+            <input type="hidden" name="command" value="change_password">
             <div class="input-change-password">
-                <input type="hidden" name="command" value="change_password">
                 <input
                         type="text"
                         name="oldPassword"
@@ -150,7 +151,51 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </div>
 </dialog>
 
-<c:if test="${role != 0}">
+<dialog id="add-event">
+    <div class="registration_form">
+        <div class="close-icon">
+            <i onclick="closeAddEvents()" class="far fa-times-circle"></i>
+        </div>
+        <form method="post" class="form">
+            <div class="input-change-password">
+                <input type="hidden" name="command" value="add_event"/>
+                <input
+                        type="text"
+                        name="eventName"
+                        size="36"
+                        placeholder="Event name"
+                        class="input"
+                        required
+                />
+            </div>
+            <div class="input-change-password">
+                <input
+                        type="text"
+                        name="address"
+                        size="36"
+                        placeholder="Address"
+                        class="input"
+                        required
+                />
+            </div>
+            <div class="input-change-password">
+                <input
+                        style="width: 94%"
+                        type="datetime-local"
+                        pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                        name="date"
+                        class="input"
+                        required
+                />
+            </div>
+
+            <button onclick="closeAddEvents()" class="gradient-button is-small">
+                Add event
+            </button>
+        </form>
+    </div>
+</dialog>
+
 <h1 class="header-account">Active events</h1>
     <div class="table-wrapper">
         <table class="table">
@@ -173,7 +218,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             </c:forEach>
         </table>
     </div>
-</c:if>
 
 
 <!--if UserRole == Speaker-->

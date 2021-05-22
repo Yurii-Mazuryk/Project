@@ -1,6 +1,5 @@
 package com.pond.project.service.commands;
 
-import com.pond.project.service.commands.Command;
 import com.pond.project.service.dao.UserDao;
 import com.pond.project.service.models.User;
 

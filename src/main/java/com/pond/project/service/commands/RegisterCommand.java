@@ -19,15 +19,15 @@ public class RegisterCommand implements Command{
         user.setPassword(request.getParameter("password"));
         user.setName(request.getParameter("name"));
         if (user.getPassword().length() < 6) {
-            path = "/error/user-not-valid.jsp";
+            path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Password length must be more then 5 symbols.");
             return path;
         } else if (user.getPhoneNumber().length() != 10) {
-            path = "/error/user-not-valid.jsp";
+            path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Incorrect phone number.");
             return path;
         } else if (new UserDao().isValidLogin(user.getLogin())) {
-            path = "/error/user-not-valid.jsp";
+            path = "/error/error-page.jsp";
             request.setAttribute("error-message", "This email is already used.");
             return path;
         }

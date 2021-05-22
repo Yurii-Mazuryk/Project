@@ -17,7 +17,7 @@ public class LoginCommand implements  Command{
         String password = request.getParameter("password");
 
         if (login == null || password == null) {
-            path = "/error/user-not-valid.jsp";
+            path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Fields cannot be empty!");
             return path;
         }
@@ -25,7 +25,7 @@ public class LoginCommand implements  Command{
 
         User user = new UserDao().getUserByLogin(login);
         if (!password.equals(user.getPassword())) {
-            path = "/error/user-not-valid.jsp";
+            path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Incorrect password.");
             return path;
         }

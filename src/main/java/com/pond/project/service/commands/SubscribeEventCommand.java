@@ -12,6 +12,6 @@ public class SubscribeEventCommand implements Command{
         int user_id = (int) request.getSession().getAttribute("user_id");
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         new EventDao().subscribeEvent(user_id, event_id);
-        return "/view/account.jsp";
+        return new AccountPageCommand().execute(request, response);
     }
 }

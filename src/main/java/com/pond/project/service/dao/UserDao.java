@@ -16,12 +16,13 @@ public class UserDao {
             "Project.users(user_login, user_password, user_name, user_phone, role_id) " +
             "VALUES (?, ?, ?, ?, ?)";
     private final String SQL_GET_USERS = "SELECT * FROM Project.users WHERE user_id > ? LIMIT ?";
-    private final String SQL_SEARCH_USER_BY_ID = "SELECT * FROM Project.users WHERE user_id = ?";
+    private final String SQL_GET_USER_BY_ID = "SELECT * FROM Project.users WHERE user_id = ?";
     private final String SQL_IS_VALID_USER_BY_LOGIN = "SELECT user_login FROM Project.users WHERE user_login = ?";
     private final String SQL_SEARCH_USER_BY_LOGIN = "SELECT * FROM Project.users WHERE user_login = ?";
     private final String SQL_GET_COUNT_OF_USERS = "SELECT COUNT(user_id) FROM Project.users";
     private final String SQL_UPDATE_ROLE_BY_LOGIN = "UPDATE Project.users SET role_id = ? WHERE user_login = ?";
-
+    private final String SQL_UPDATE_PASSWORD_BY_ID = "UPDATE Project.users SET user_password = ? WHERE user_id = ?";
+    private final String SQL_UPDATE_NAME_BY_ID = "UPDATE Project.users SET user_name = ? WHERE user_id = ?";
     public void insertUser(User user) {
         Connection connection = PoolConnectionBuilder.getInstance().getConnection();
         try {
@@ -130,4 +131,50 @@ public class UserDao {
         return countOfUsers;
     }
 
+    public void changePassword(int userId, String newPassword) {
+        Connection connection = new PoolConnectionBuilder().getConnection();
+        try {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_UPDATE_PASSWORD_BY_ID);
+            pStmt.setString(1, newPassword);
+            pStmt.setInt(2, userId);
+            pStmt.executeUpdate();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public User getUserById(int userId) {
+        User user = new User();
+        Connection connection = PoolConnectionBuilder.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_USER_BY_ID);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            user.setLogin(resultSet.getString("user_login"));
+            user.setName(resultSet.getString("user_name"));
+            user.setId(resultSet.getInt("user_id"));
+            user.setPassword(resultSet.getString("user_password"));
+            user.setPhoneNumber(resultSet.getString("user_phone"));
+            user.setRole(resultSet.getInt("role_id"));
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
+
+    public void changeUserName(int userId, String name){
+        Connection connection = new PoolConnectionBuilder().getConnection();
+        try {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_UPDATE_NAME_BY_ID);
+            pStmt.setString(1, name);
+            pStmt.setInt(2, userId);
+            pStmt.executeUpdate();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
