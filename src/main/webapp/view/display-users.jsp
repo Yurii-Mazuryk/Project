@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-    <h1 class="header-account">All users</h1>
     <link rel="stylesheet" href="resources/styles/test.css">
 </head>
 
@@ -27,6 +26,8 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </div>
 </header>
 
+<h1 class="header-account">All users</h1>
+
 <div class="table-wrapper">
     <table class="table">
         <tr>
@@ -47,14 +48,16 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                     <c:if test="${user.getRole() == 1}">Speaker</c:if>
                     <c:if test="${user.getRole() == 0}">Moderator</c:if>
                 </td>
-                <form method="get" action="/PetProject_war/main">
-                    <input type="hidden" name="command" value="change_role">
-                    <input type="hidden" name="roleId" value="${user.getRole()}">
-                    <input type="hidden" name="userLogin" value="${user.getLogin()}">
-                    <button class="change-role-button" type="submit">
-                        <span>Change role</span>
-                    </button>
-                </form>
+                <td>
+                    <form method="post" action="/PetProject_war/main">
+                        <input type="hidden" name="command" value="change_role">
+                        <input type="hidden" name="roleId" value="${user.getRole()}">
+                        <input type="hidden" name="userLogin" value="${user.getLogin()}">
+                        <button class="change-role-button" type="submit">
+                            <span>Change role</span>
+                        </button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>

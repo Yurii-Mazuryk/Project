@@ -16,6 +16,7 @@ public class AddReportCommand implements Command{
         report.setEventName(request.getParameter("eventName"));
         if (report.getEventName() != null && report.getTitle() != null)
             new ReportDao().insertReport(report);
-        return "/view/display-reports.jsp";
+
+        return new DisplayReportsCommand().execute(request, response);
     }
 }

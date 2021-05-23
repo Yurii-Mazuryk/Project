@@ -12,6 +12,6 @@ public class ChangeRoleCommand implements Command{
             new UserDao().updateRole(request.getParameter("userLogin"), 2);
         else if (request.getParameter("roleId").equals("2"))
             new UserDao().updateRole(request.getParameter("userLogin"), 1);
-        return "/view/display-users.jsp";
+        return new DisplayUserCommand().execute(request, response);
     }
 }

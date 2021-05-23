@@ -23,6 +23,7 @@ public class ReportDao {
             "VALUES (? , ?)";
     private final String SQL_INCREMENT_OFFERS_COUNT = "UPDATE Project.reports SET offers_count = offers_count + 1 WHERE report_id = ?";
     private final String SQL_GET_SPEAKER_OFFERS = "SELECT speaker_login FROM Project.speaker_reports_offers WHERE report_id = ?";
+    private final String SQL_UPDATE_TITLE = "UPDATE Project.reports SET title = ? WHERE title = ?";
     public void insertReport(Report report) {
         Connection connection = new PoolConnectionBuilder().getConnection();
         try {
@@ -176,8 +177,8 @@ public class ReportDao {
     public List<List<String>> getOffers(int start, int limit) {
         Connection connection = new PoolConnectionBuilder().getConnection();
         List<List<String>> lists = new ArrayList<>();
-        for (int i = 0; start + 1 <= limit; i++, start++) {
-            try {
+        try {
+            for (int i = 0; start + 1 <= limit; i++, start++) {
                 PreparedStatement pStmt = connection.prepareStatement(SQL_GET_SPEAKER_OFFERS);
                 pStmt.setInt(1, i);
                 ResultSet resultSet = pStmt.executeQuery();
@@ -185,10 +186,24 @@ public class ReportDao {
                 while (resultSet.next()) {
                     lists.get(i).add(resultSet.getString("speaker_login"));
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return lists;
+    }
+
+    public void updateReportTitle(String oldTitle, String newTitle) {
+        Connection connection = new PoolConnectionBuilder().getConnection();
+        try {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_UPDATE_TITLE);
+            pStmt.setString(1, newTitle);
+            pStmt.setString(2, oldTitle);
+            pStmt.executeUpdate();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

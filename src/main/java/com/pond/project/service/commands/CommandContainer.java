@@ -29,6 +29,7 @@ public class CommandContainer {
         commandMap.put("start_page", new StartPageRedirectCommand());
         commandMap.put("change_role", new ChangeRoleCommand());
         commandMap.put("display_reports", new DisplayReportsCommand());
+        commandMap.put("add_report", new AddReportCommand());
     }
 
     public Command getCommand(String commandName) {

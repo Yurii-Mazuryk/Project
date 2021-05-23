@@ -65,7 +65,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             <i onclick="closeAddReport()" class="far fa-times-circle"></i>
         </div>
         <form method="post" class="form" action="/PetProject_war/main">
-
+            <input type="hidden" name="command" value="add_report">
             <div class="input-change-password">
                 <input
                         type="text"
@@ -87,7 +87,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                 />
             </div>
 
-            <button onclick="closeAddReport()" class="gradient-button is-small">
+            <button type="submit" onclick="closeAddReport()" class="gradient-button is-small">
                 Add report
             </button>
         </form>
@@ -98,18 +98,9 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <div class="close-icon">
             <i onclick="closeUpdateReport()" class="far fa-times-circle"></i>
         </div>
-        <form method="post" class="form">
+        <form method="post" class="form" action="/PetProject_war/main">
+            <input type="hidden" name="command" value="updateReport">
 
-            <div class="input-change-password">
-                <input
-                        type="text"
-                        name="eventName"
-                        size="36"
-                        placeholder="Event name"
-                        class="input"
-                        required
-                />
-            </div>
             <div class="input-change-password">
                 <input
                         type="text"
@@ -130,7 +121,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                         required
                 />
             </div>
-            <button onclick="closeUpdateReport()" class="gradient-button is-small">
+            <button type="submit" onclick="closeUpdateReport()" class="gradient-button is-small">
                 Add report
             </button>
         </form>

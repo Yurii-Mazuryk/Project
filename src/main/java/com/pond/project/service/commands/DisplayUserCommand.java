@@ -20,7 +20,8 @@ public class DisplayUserCommand implements Command {
         request.setAttribute("users", list);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
-
+        if ("post".equalsIgnoreCase(request.getMethod()))
+            return "main?command=display_user";
         return "/view/display-users.jsp";
     }
 }
