@@ -4,7 +4,7 @@ public class Report {
     private int id;
     private String title;
     private String text;
-    private int speakerId;
+    private String speakerLogin;
     private String eventName;
     private boolean isReportConfirmed = false;
     private int offersCount = 0;
@@ -58,12 +58,12 @@ public class Report {
         this.title = title;
     }
 
-    public int getSpeakerId() {
-        return speakerId;
+    public String getSpeakerLogin() {
+        return speakerLogin;
     }
 
-    public void setSpeakerId(int speakerId) {
-        this.speakerId = speakerId;
+    public void setSpeakerLogin(String speakerLogin) {
+        this.speakerLogin = speakerLogin;
     }
 
     public String getText() {

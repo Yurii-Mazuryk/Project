@@ -30,6 +30,9 @@ public class CommandContainer {
         commandMap.put("change_role", new ChangeRoleCommand());
         commandMap.put("display_reports", new DisplayReportsCommand());
         commandMap.put("add_report", new AddReportCommand());
+        commandMap.put("report_content", new DisplayReportContentCommand());
+        commandMap.put("update_report", new UpdateReportCommand());
+        commandMap.put("approve_offer", new ApproveOfferCommand());
     }
 
     public Command getCommand(String commandName) {

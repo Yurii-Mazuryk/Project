@@ -30,6 +30,8 @@ public class EventDao {
             " Project.events.reports_count, Project.events.participant_count, Project.events.event_id" +
             " FROM Project.events INNER JOIN Project.event_participant p WHERE p.user_id = ? AND p.event_id = Project.events.event_id AND Project.events.date > NOW()";
     private final String SQL_SUBSCRIBE_ON_EVENT = "INSERT INTO Project.event_participant (user_id, event_id) VALUES (?, ?)";
+    private final String SQL_INCREMENT_REPORTS_COUNT = "UPDATE Project.events SET participant_count = participant_count + 1 WHERE name = ?";
+
 
     public void insertEvent(Event event) {
         Connection connection = new PoolConnectionBuilder().getConnection();
@@ -263,6 +265,17 @@ public class EventDao {
         return countOfFutureEvents;
     }
 
+    public void incrementReportsCount(String eventName) {
+        Connection connection = new PoolConnectionBuilder().getConnection();
+        try {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_INCREMENT_REPORTS_COUNT);
+            pStmt.setString(1, eventName);
+            pStmt.executeUpdate();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     public List<Event> getMemberActiveEvents(int user_id) {
         List<Event> list = new ArrayList<>();

@@ -14,6 +14,7 @@ public class AddReportCommand implements Command{
         Report report = new Report();
         report.setTitle(request.getParameter("reportTitle"));
         report.setEventName(request.getParameter("eventName"));
+
         if (report.getEventName() != null && report.getTitle() != null)
             new ReportDao().insertReport(report);
 

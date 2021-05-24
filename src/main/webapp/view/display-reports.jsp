@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="resources/styles/test.css">
     <script src="https://kit.fontawesome.com/70d19259f2.js" crossorigin="anonymous"></script>
     <script>
-        function showReportOffers() {
+        function showReportOffers(reportId) {
+            document.getElementById("report").value = reportId;
             document.getElementById("approve-offers").showModal();
         }
         function closeReportOffers() {
@@ -99,7 +100,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             <i onclick="closeUpdateReport()" class="far fa-times-circle"></i>
         </div>
         <form method="post" class="form" action="/PetProject_war/main">
-            <input type="hidden" name="command" value="updateReport">
+            <input type="hidden" name="command" value="update_report">
 
             <div class="input-change-password">
                 <input
@@ -132,12 +133,14 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <div class="close-icon">
             <i onclick="closeReportOffers()" class="far fa-times-circle"></i>
         </div>
-        <form class="form" method="get" action="/PetProject_war/main">
+        <form class="form" method="post" action="/PetProject_war/main">
+            <input type="hidden" id="report" data-index="1" name="reportId" />
+            <input type="hidden" name="command" value="approve_offer">
             <div class="table-wrapper">
                 <table class="reports-table">
                     <thead>
                     <tr>
-                        <th>Speaker name</th>
+                        <th>Speaker login</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -154,7 +157,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                     </tbody>
                 </table>
             </div>
-
             <button type="submit" onclick="closeReportOffers()" class="gradient-button is-small">
                 Approve
             </button>
@@ -170,7 +172,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             <th>ID</th>
             <th>Title</th>
             <th>Event Name</th>
-            <th>Speaker's id</th>
+            <th>Speaker login</th>
             <th>Confirmed</th>
             <th>Offers</th>
         </tr>
@@ -180,11 +182,13 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
                 <td>${report.getId()}</td>
                 <td>${report.getTitle()}</td>
                 <td>${report.getEventName()}</td>
-                <td>${report.getSpeakerId()}</td>
+                <td>${report.getSpeakerLogin()}</td>
                 <td>${report.isReportConfirmed()}</td>
-                <td><button class="show-offers-button" onclick="showReportOffers()">
+                <c:if test="${report.isReportConfirmed() eq false}">
+                <td><button class="show-offers-button" onclick="showReportOffers(${report.getId()})">
                     <span>${report.getOffersCount()}</span></button>
                 </td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>

@@ -24,7 +24,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 <header>
     <div class="header-menu">
         <c:if test="${not empty user_name}">
-            <i id="name"><c:out value="${user_name}"/></i>
+            <i id="name">${user_name}</i>
         </c:if>
         <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
         <a href="main?command=display_event&events_type=future"><i>Events</i></a>
