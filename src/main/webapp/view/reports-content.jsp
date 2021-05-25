@@ -17,18 +17,19 @@
 background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);">
 <header>
     <div class="header-menu">
-        <c:if test="${not empty user_name}">
-            <i id="name">${user_name}</i>
-        </c:if>
-        <a href="http://localhost:8080/PetProject_war/"><i>Home</i></a>
-        <a href="main?command=display_event&events_type=future"><i>Events</i></a>
-        <a href="main?command=account_page" style="color: blue"><i>Account</i></a>
-        <c:if test="${empty user_name}">
-            <a href="main?command=login_page"><i>Log in</i></a>
-        </c:if>
-        <c:if test="${not empty user_name}">
-            <a href="main?command=log_out"><i>Log Out</i></a>
-        </c:if>
+    <c:if test="${not empty user_name}">
+        <i id="name">${user_name}</i>
+    </c:if>
+    <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
+    <a href="main?command=display_event&events_type=future"><i>Events</i></a>
+    <c:if test="${not empty user_name}">
+        <a href="main?command=account_page"><i>Account</i></a>
+        <a href="main?command=log_out"><i>Log Out</i></a>
+    </c:if>
+    <c:if test="${empty user_name}">
+        <a href="main?command=login_page"><i>Account</i></a>
+        <a href="main?command=login_page"><i>Log in</i></a>
+    </c:if>
     </div>
 </header>
 
@@ -41,31 +42,42 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <tr>
             <th>Report ID</th>
             <th>Report title</th>
-            <td>Speaker Login</td>
             <th>Content</th>
+            <td>Speaker Login</td>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="report" items="reports">
+        <c:forEach var="report" items="${reports}">
             <tr>
                 <td>${report.getId()}</td>
                 <td>${report.getTitle()}</td>
                 <td>${report.getText()}</td>
                 <td>${report.getSpeakerLogin()}</td>
             </tr>
-        </tbody>
         </c:forEach>
+        </tbody>
     </table>
 </div>
 
 <div class="pagination-table">
     <table class="table" style="width: fit-content;">
         <tr>
-            <td><a href="#">&laquo;</a></td>
-            <td><a href="#">1</a></td>
-            <td><a href="#">2</a></td>
-            <td><a href="#">3</a></td>
-            <td><a href="#">&raquo;</a></td>
+            <c:if test="${currentPage != 1}">
+                <td><a href="main?command=report_content&page=${currentPage - 1}">&laquo</a></td>
+            </c:if>
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <td>${i}</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td><a href="main?command=report_content&page=${i}">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${currentPage lt noOfPages}">
+                <td><a href="main?command=report_content&page=${currentPage + 1}">&raquo</a></td>
+            </c:if>
         </tr>
     </table>
 </div>

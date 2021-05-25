@@ -33,6 +33,7 @@ public class CommandContainer {
         commandMap.put("report_content", new DisplayReportContentCommand());
         commandMap.put("update_report", new UpdateReportCommand());
         commandMap.put("approve_offer", new ApproveOfferCommand());
+        commandMap.put("display_speaker", new DisplaySpeakerCommand());
     }
 
     public Command getCommand(String commandName) {

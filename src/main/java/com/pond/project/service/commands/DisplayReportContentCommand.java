@@ -24,6 +24,6 @@ public class DisplayReportContentCommand implements Command{
         request.setAttribute("currentPage", page);
         if ("POST".equalsIgnoreCase(request.getMethod()))
             return "main?command=report_content";
-        return "/view/report-content.jsp";
+        return "/view/reports-content.jsp";
     }
 }

@@ -38,17 +38,19 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 <header>
     <div class="header-menu">
         <c:if test="${not empty user_name}">
-            <i id="name"><c:out value="${user_name}"/></i>
+            <i id="name">${user_name}</i>
         </c:if>
         <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
         <a href="main?command=display_event&events_type=future"><i>Events</i></a>
-        <a href="main?command=account_page"><i>Account</i></a>
-        <c:if test="${empty user_name}">
-            <a href="main?command=login_page"><i>Log in</i></a>
-        </c:if>
         <c:if test="${not empty user_name}">
+            <a href="main?command=account_page"><i>Account</i></a>
             <a href="main?command=log_out"><i>Log Out</i></a>
         </c:if>
+        <c:if test="${empty user_name}">
+            <a href="main?command=login_page"><i>Account</i></a>
+            <a href="main?command=login_page"><i>Log in</i></a>
+        </c:if>
+
     </div>
 </header>
 

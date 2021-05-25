@@ -139,8 +139,9 @@ public class ReportDao {
             while (resultSet.next()) {
                 Report report = new Report();
                 report.setOffersCount(resultSet.getInt("offers_count"));
-                report.setTitle(resultSet.getString("title"));
                 report.setId(resultSet.getInt("report_id"));
+                report.setTitle(resultSet.getString("title"));
+                report.setText(resultSet.getString("text"));
                 report.setSpeakerLogin(resultSet.getString("speaker_login"));
                 report.setReportConfirmed(resultSet.getBoolean("is_report_confirmed"));
                 report.setEventName(resultSet.getString("event_name"));

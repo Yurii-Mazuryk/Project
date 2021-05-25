@@ -9,23 +9,29 @@
     <link rel="stylesheet" href="resources/styles/test.css">
 </head>
 
+<header>
+    <div class="header-menu">
+        <c:if test="${not empty user_name}">
+            <i id="name">${user_name}</i>
+        </c:if>
+        <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
+        <a href="main?command=display_event&events_type=future"><i>Events</i></a>
+        <c:if test="${not empty user_name}">
+            <a href="main?command=account_page"><i>Account</i></a>
+            <a href="main?command=log_out"><i>Log Out</i></a>
+        </c:if>
+        <c:if test="${empty user_name}">
+            <a href="main?command=login_page"><i>Account</i></a>
+            <a href="main?command=login_page"><i>Log in</i></a>
+        </c:if>
+
+    </div>
+</header>
+
 <body style="background: rgb(238,174,202);
 background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);">
 
-<div class="header-menu">
-    <c:if test="${not empty user_name}">
-        <i id="name"><c:out value="${user_name}"/></i>
-    </c:if>
-    <a href="http://localhost:8080/PetProject_war/"><i>Home</i></a>
-    <a href="main?command=display_event&events_type=future"><i style="color:blue">Events</i></a>
-    <a href="main?command=account_page"><i>Account</i></a>
-    <c:if test="${empty user_name}">
-        <a href="main?command=login_page"><i>Log in</i></a>
-    </c:if>
-    <c:if test="${not empty user_name}">
-        <a href="main?command=log_out"><i>Log Out</i></a>
-    </c:if>
-</div>
+
 <div class="events-header">
     <p><%=request.getParameter("events_type")%> events</p>
 </div>

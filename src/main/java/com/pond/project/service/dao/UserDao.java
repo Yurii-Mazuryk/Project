@@ -16,6 +16,7 @@ public class UserDao {
             "Project.users(user_login, user_password, user_name, user_phone, role_id) " +
             "VALUES (?, ?, ?, ?, ?)";
     private final String SQL_GET_USERS = "SELECT * FROM Project.users WHERE user_id > ? LIMIT ?";
+    private final String SQL_GET_SPEAKERS = "SELECT * FROM Project.users WHERE user_id > ? AND role_id = 1 LIMIT ? ";
     private final String SQL_GET_USER_BY_ID = "SELECT * FROM Project.users WHERE user_id = ?";
     private final String SQL_IS_VALID_USER_BY_LOGIN = "SELECT user_login FROM Project.users WHERE user_login = ?";
     private final String SQL_SEARCH_USER_BY_LOGIN = "SELECT * FROM Project.users WHERE user_login = ?";
@@ -23,6 +24,7 @@ public class UserDao {
     private final String SQL_UPDATE_ROLE_BY_LOGIN = "UPDATE Project.users SET role_id = ? WHERE user_login = ?";
     private final String SQL_UPDATE_PASSWORD_BY_ID = "UPDATE Project.users SET user_password = ? WHERE user_id = ?";
     private final String SQL_UPDATE_NAME_BY_ID = "UPDATE Project.users SET user_name = ? WHERE user_id = ?";
+    private final String SQL_SPEAKERS_COUNT = "SELECT COUNT(user_name) FROM Project.users WHERE role_id = 1";
     public void insertUser(User user) {
         Connection connection = PoolConnectionBuilder.getInstance().getConnection();
         try {
@@ -175,6 +177,48 @@ public class UserDao {
             connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public List<User> getSpeakers(int start, int limit) {
+        List<User> list = new ArrayList<>();
+        Connection connection = new PoolConnectionBuilder().getConnection();
+        try {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_GET_SPEAKERS);
+            pStmt.setInt(1, start);
+            pStmt.setInt(2, limit);
+            ResultSet resultSet = pStmt.executeQuery();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setLogin(resultSet.getString("user_login"));
+                user.setName(resultSet.getString("user_name"));
+                user.setId(resultSet.getInt("user_id"));
+                user.setPassword(resultSet.getString("user_password"));
+                user.setPhoneNumber(resultSet.getString("user_phone"));
+                user.setRole(resultSet.getInt("role_id"));
+                list.add(user);
+            }
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
+    }
+
+    public int getSpeakersCount() {
+        {
+            int countOfSpeakers = 0;
+            Connection connection = new PoolConnectionBuilder().getConnection();
+            try {
+                PreparedStatement pStmt = connection.prepareStatement(SQL_SPEAKERS_COUNT);
+                ResultSet resultSet = pStmt.executeQuery();
+                resultSet.next();
+                countOfSpeakers = resultSet.getInt("count(user_id)");
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            return countOfSpeakers;
         }
     }
 }
