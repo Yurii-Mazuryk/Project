@@ -1,5 +1,6 @@
 package com.pond.project.service.commands;
 
+import com.pond.project.service.commands.redirect.LoginPageCommand;
 import com.pond.project.service.dao.UserDao;
 import com.pond.project.service.models.User;
 
@@ -7,22 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RegisterCommand implements Command{
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         User user = new User();
-        String path = "/view/login.jsp";
+        String path;
 
         user.setLogin(request.getParameter("email"));
-        user.setPhoneNumber(request.getParameter("phoneNum"));
+        user.setPhoneNumber(request.getParameter("phone"));
         user.setPassword(request.getParameter("password"));
         user.setName(request.getParameter("name"));
         if (user.getPassword().length() < 6) {
             path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Password length must be more then 5 symbols.");
             return path;
-        } else if (user.getPhoneNumber().length() != 10) {
+        } else if (user.getPhoneNumber().length() != 12) {
             path = "/error/error-page.jsp";
             request.setAttribute("error-message", "Incorrect phone number.");
             return path;
@@ -32,8 +32,7 @@ public class RegisterCommand implements Command{
             return path;
         }
         new UserDao().insertUser(user);
-        if ("POST".equalsIgnoreCase(request.getMethod()))
-            return "main?command=login_page";
-        return path;
+
+        return "main?command=login_page";
     }
 }

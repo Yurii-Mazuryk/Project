@@ -13,8 +13,6 @@ public class AccountPageCommand implements Command {
         int userId = (int) request.getSession().getAttribute("user_id");
         List<Event> list = new EventDao().getMemberActiveEvents(userId);
         request.setAttribute("actives", list);
-        if(request.getSession().getAttribute("role").equals("1"))
-            return new DisplayFreeReportCommand().execute(request, response);
         if ("POST".equalsIgnoreCase(request.getMethod()))
             return "main?command=account_page";
         return "/view/account.jsp";

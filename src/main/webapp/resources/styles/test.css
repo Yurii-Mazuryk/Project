@@ -1,11 +1,12 @@
 body {
-    font-family: "Apple Symbols", sans-serif;
+    font-family: Arial, monospace;
+    font-size: 14px;
     margin: 0;
 }
 
 header {
     background: #00b0d8;
-    height: 3.5em;
+    height: 3.8em;
 }
 
 a {
@@ -16,17 +17,17 @@ a {
 .header-menu {
     display: block;
     width: 100%;
-    padding-top: 13px;
+    padding-top: 11px;
     text-align: right;
 }
 
 #name {
-    margin-right: 38em;
+    margin-right: 29em;
 }
 
 .header-menu i {
     margin: 1em;
-    font-size: x-large;
+    font-size: 22px;
     color: bisque;
 }
 
@@ -117,8 +118,8 @@ a {
 
 
 .form-input {
-    font-family: "Apple Symbols", sans-serif;
-    font-size: 100%;
+    font-family: Arial, monospace;
+    font-size: 14px;
     background: none;
     border-radius: 15px;
     color: white;
@@ -187,7 +188,7 @@ a {
     background: linear-gradient(247.21deg, #37b5d5 8.73%, #07a0c2 90.64%);
     border-style: none;
     height: 4em;
-    font-size: 0.9em;
+    font-size: 13px;
     cursor: pointer;
     border-radius: 12px;
     font-weight: 600;
@@ -254,8 +255,8 @@ a {
 }
 
 .input {
-    font-family: "Apple Symbols", sans-serif;
-    font-size: 100%;
+    font-family: Arial, monospace;
+    font-size: 14px;
     height: 2em;
     background: none;
     border-radius: 15px;

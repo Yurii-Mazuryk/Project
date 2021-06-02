@@ -13,8 +13,8 @@ import java.util.List;
 
 public class UserDao {
     private final String SQL_INSERT_USER = "INSERT INTO " +
-            "Project.users(user_login, user_password, user_name, user_phone, role_id) " +
-            "VALUES (?, ?, ?, ?, ?)";
+            "Project.users(user_login, user_password, user_name, user_phone) " +
+            "VALUES (?, ?, ?, ?)";
     private final String SQL_GET_USERS = "SELECT * FROM Project.users WHERE user_id > ? LIMIT ?";
     private final String SQL_GET_SPEAKERS = "SELECT * FROM Project.users WHERE user_id > ? AND role_id = 1 LIMIT ? ";
     private final String SQL_GET_USER_BY_ID = "SELECT * FROM Project.users WHERE user_id = ?";
@@ -25,6 +25,7 @@ public class UserDao {
     private final String SQL_UPDATE_PASSWORD_BY_ID = "UPDATE Project.users SET user_password = ? WHERE user_id = ?";
     private final String SQL_UPDATE_NAME_BY_ID = "UPDATE Project.users SET user_name = ? WHERE user_id = ?";
     private final String SQL_SPEAKERS_COUNT = "SELECT COUNT(user_name) FROM Project.users WHERE role_id = 1";
+
     public void insertUser(User user) {
         Connection connection = PoolConnectionBuilder.getInstance().getConnection();
         try {
@@ -33,8 +34,8 @@ public class UserDao {
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getName());
             ps.setString(4, user.getPhoneNumber());
-            ps.setInt(5, user.getRole());
             ps.executeUpdate();
+            connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -69,9 +70,7 @@ public class UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_IS_VALID_USER_BY_LOGIN);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            String isEmpty = resultSet.getString("user_login");
-            if (isEmpty == null)
+            if (resultSet.next())
                 avalible = true;
             connection.close();
         } catch (SQLException throwables) {
@@ -213,7 +212,7 @@ public class UserDao {
                 PreparedStatement pStmt = connection.prepareStatement(SQL_SPEAKERS_COUNT);
                 ResultSet resultSet = pStmt.executeQuery();
                 resultSet.next();
-                countOfSpeakers = resultSet.getInt("count(user_id)");
+                countOfSpeakers = resultSet.getInt("count(user_name)");
                 connection.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

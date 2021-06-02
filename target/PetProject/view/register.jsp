@@ -19,18 +19,18 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 </div>
 
 <div class="login-form">
-    <form method="post" name="registration">
+    <form method="post" name="registration" action="/PetProject_war/main">
         <div class="registration-form">
-            <input type="hidden" name="command" value="register">
+
             <div><input type="email" name="email" placeholder="Email" required class="form-input"></div>
             <div><input required type="text" name="name" placeholder="Name" minlength="4" maxlength="15" class="form-input"></div>
-            <div><input type="tel" name="phone" placeholder="phone" pattern="+380-[0-9]{2}-[0-9]{3}" maxlength="13" minlength="10" class="form-input"></div>
+            <div><input type="tel" name="phone" placeholder="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" minlength=" 10" class="form-input"></div>
             <div>
                 <input required type="password" name="password" placeholder="password" class="form-input">
                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
             </div>
 
-
+            <input type="hidden" name="command" value="register">
             <div class="button"><button type="submit">Registration</button></div>
         </div>
     </form>

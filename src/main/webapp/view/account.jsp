@@ -39,10 +39,10 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         <c:if test="${not empty user_name}">
             <i id="name">${user_name}</i>
         </c:if>
-        <a href="http://localhost:8080/PetProject_war/"><i style="color: blue">Home</i></a>
+        <a href="http://localhost:8080/PetProject_war/"><i>Home</i></a>
         <a href="main?command=display_event&events_type=future"><i>Events</i></a>
         <c:if test="${not empty user_name}">
-            <a href="main?command=account_page"><i>Account</i></a>
+            <a href="main?command=account_page"><i style="color: blue">Account</i></a>
             <a href="main?command=log_out"><i>Log Out</i></a>
         </c:if>
         <c:if test="${empty user_name}">
@@ -71,11 +71,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     <button onclick="showAddEvents()" class="gradient-button">
         <span>Attach event</span>
     </button>
-    <a href="main?command=event_display&event_type=all">
-        <button class="gradient-button">
-            <span>All events</span>
-        </button>
-    </a>
     <a href="main?command=report_content">
         <button class="gradient-button">
             <span>Reports content</span>
@@ -93,7 +88,20 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </a>
 </c:if>
 <!---->
-<!--if UserRole == Speaker-->
+
+<c:if test="${role == 1}">
+    <a href="main?command=report_content">
+        <button class="gradient-button">
+            <span>Reports</span>
+        </button>
+    </a>
+</c:if>
+
+<a href="main?command=display_event&events_type=all">
+    <button class="gradient-button">
+        <span>All events</span>
+    </button>
+</a>
 
 <a href="main?command=display_event&events_type=completed">
     <button class="gradient-button">
@@ -241,52 +249,6 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
     </div>
 
 
-<!--if UserRole == Speaker-->
-<c:if test="${role == 1}">
-<h2 class="header-account">Free reports</h2>
-    <div class="table-wrapper">
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Event Name</th>
-            </tr>
-
-            <c:forEach var="report" items="${reports}">
-                <tr>
-                    <td>${report.getId()}</td>
-                    <td>${report.getTitle()}</td>
-                    <td>${report.getEventName()}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
-
-<div class="pagination-table">
-    <table class="table" style="width: fit-content;">
-        <tr>
-            <c:if test="${currentPage != 1}">
-                <td><a href="main?command=free_reports&page=${currentPage - 1}">&laquo</a></td>
-            </c:if>
-            <c:forEach begin="1" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <td>${i}</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td><a href="main?command=free_reports&page=${i}">${i}</a></td>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-            <c:if test="${currentPage lt noOfPages}">
-                <td><a href="main?command=free_reports&page=${currentPage + 1}">&raquo</a></td>
-            </c:if>
-        </tr>
-    </table>
-</div>
-</c:if>
-
-<!---->
 
 </body>
 </html>

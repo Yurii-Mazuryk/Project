@@ -21,7 +21,6 @@ public class CommandContainer {
         commandMap.put("display_user", new DisplayUserCommand());
         commandMap.put("display_event", new DisplayEventCommand());
         commandMap.put("account_page", new AccountPageCommand());
-        commandMap.put("free_reports", new DisplayFreeReportCommand());
         commandMap.put("subscribe_event", new SubscribeEventCommand());
         commandMap.put("change_password", new ChangePasswordCommand());
         commandMap.put("change_name", new ChangeUserNameCommand());
@@ -30,7 +29,7 @@ public class CommandContainer {
         commandMap.put("change_role", new ChangeRoleCommand());
         commandMap.put("display_reports", new DisplayReportsCommand());
         commandMap.put("add_report", new AddReportCommand());
-        commandMap.put("report_content", new DisplayReportContentCommand());
+        commandMap.put("report_content", new DisplayReportsContentCommand());
         commandMap.put("update_report", new UpdateReportCommand());
         commandMap.put("approve_offer", new ApproveOfferCommand());
         commandMap.put("display_speaker", new DisplaySpeakerCommand());

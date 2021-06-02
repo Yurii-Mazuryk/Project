@@ -23,6 +23,6 @@ public class DisplaySpeakerCommand implements Command{
         request.setAttribute("currentPage", page);
         if ("post".equalsIgnoreCase(request.getMethod()))
             return "main?command=display_speaker";
-        return "/view/display-speaker.jsp";
+        return "/view/display-speakers.jsp";
     }
 }

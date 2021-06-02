@@ -15,9 +15,9 @@ public class ReportDao {
     private final String SQL_INSERT_REPORT = "INSERT INTO Project.reports (title, event_name) VALUES (?, ?)";
     private final String SQL_SET_SPEAKER = "UPDATE Project.reports SET speaker_login = ?, is_report_confirmed = 1 WHERE report_id = ?";
     private final String SQL_GET_REPORT_BY_TITLE = "SELECT * FROM Project.reports WHERE title = ?";
-    private final String SQL_GET_FREE_REPORTS = "SELECT * FROM Project.reports WHERE speaker_login = 0 AND report_id > ? LIMIT ?";
+    private final String SQL_GET_FREE_REPORTS = "SELECT * FROM Project.reports WHERE speaker_login = '0' LIMIT ?, ?";
     private final String SQL_GET_COUNT_OF_FREE_REPORTS = "SELECT COUNT(report_id) FROM Project.reports where speaker_login = 0";
-    private final String SQL_GET_REPORTS = "SELECT * FROM Project.reports WHERE report_id > ? LIMIT ?";
+    private final String SQL_GET_REPORTS = "SELECT * FROM Project.reports LIMIT ?, ?";
     private final String SQL_GET_COUNT_OF_REPORTS = "SELECT COUNT(report_id) FROM Project.reports";
     private final String SQL_SET_OFFER_FOR_REPORT = "INSERT INTO Project.speaker_reports_offers (speaker_login, report_id) " +
             "VALUES (? , ?)";
@@ -55,6 +55,7 @@ public class ReportDao {
 //                report.setSpeakerId(resultSet.getInt("speaker_id"));
 //                report.setReportConfirmed(resultSet.getBoolean("is_report_confirmed"));
                 report.setEventName(resultSet.getString("event_name"));
+                report.setText(resultSet.getString("text"));
                 list.add(report);
             }
             connection.close();

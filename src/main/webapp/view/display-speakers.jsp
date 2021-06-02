@@ -46,7 +46,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
             <i onclick="closeProposeReports()" class="far fa-times-circle"></i>
         </div>
         <form method="post" class="form">
-
+            <input type="hidden" name="command" value="propose_report">
             <div class="input-change-password">
                 <input
                         min="0"

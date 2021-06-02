@@ -21,7 +21,7 @@ public class EventDao {
     private final String SQL_GET_EVENTS = "SELECT * FROM Project.events WHERE event_id > ? LIMIT ?";
     private final String SQL_SET_SPEAKER_FOR_EVENT = "INSERT INTO Project.event_speakers (event_id, speaker_id) VALUES (?, ?)";
     private final String SQL_GET_CLOSEST_EVENT = "SELECT * FROM Project.events WHERE date > now() ORDER BY date LIMIT 1";
-    private final String SQL_GET_FUTURE_EVENTS = "SELECT * FROM Project.events WHERE date > now()";
+    private final String SQL_GET_FUTURE_EVENTS = "SELECT * FROM Project.events WHERE date > now() AND event_id > ? LIMIT ?";
     private final String SQL_GET_MEMBER_COMPLETED_EVENTS = "SELECT Project.events.name, Project.events.date, Project.events.address, Project.events.reports_count, Project.events.participant_count " +
             "FROM Project.events " +
             "INNER JOIN Project.event_participant p WHERE p.user_id = ? AND p.event_id = Project.events.event_id AND Project.events.date < NOW()";
@@ -185,11 +185,13 @@ public class EventDao {
     }
 
 
-    public List<Event> getFutureEvents(int start, int end) {
+    public List<Event> getFutureEvents(int start, int limit) {
         List<Event> list = new ArrayList<>();
         Connection connection = new PoolConnectionBuilder().getConnection();
         try {
             PreparedStatement pStmt = connection.prepareStatement(SQL_GET_FUTURE_EVENTS);
+            pStmt.setInt(1, start);
+            pStmt.setInt(2, limit);
             ResultSet resultSet = pStmt.executeQuery();
             while (resultSet.next()) {
                 Event event = new Event();

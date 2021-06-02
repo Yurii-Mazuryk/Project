@@ -50,9 +50,12 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 
 <div class="conference-date">
     <p>
-    <div class="date"><span class="text">${event.date}</span></div>
+    <div class="date"><span style="font-family: Arial;font-size: 20px">${event.date}</span></div>
     <div class="date" id="city"><span class="text">${event.address}</span></div>
-    <div class="date" id="reg"><a href="main?command=subscribe_event&event_id=<%=event.getId()%>"><span class="text">Register</span></a></div>
+    <div class="date" id="reg">
+        <c:if test="${not empty user_name}"><a href="main?command=subscribe_event&event_id=<%=event.getId()%>"> </c:if>
+            <c:if test="${empty user_name}"><a href="main?command=login_page"> </c:if>
+        <span class="text">Register</span></a></div>
     </p>
 </div>
 
